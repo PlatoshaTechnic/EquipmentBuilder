@@ -1,7 +1,7 @@
 @echo off
 echo Building Renga Plugin (x64)...
 
-call "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC\Auxiliary/Build/vcvars64.bat"
+call "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Auxiliary/Build/vcvars64.bat"
 
 set "SCRIPT_DIR=%~dp0"
 set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
