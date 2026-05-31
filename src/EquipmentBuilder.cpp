@@ -35,6 +35,10 @@ private:
     EquipmentBuilder* m_pBuilder;
 };
 
+void ActionHandlerDeleter::operator()(EquipmentBuilderActionHandler* ptr) const {
+    delete ptr;
+}
+
 bool EquipmentBuilder::initialize(const wchar_t* Path) {
     this->PluginPath = Path;
     this->PrimitivesPath = this->PluginPath + L"/Application/primitives/";

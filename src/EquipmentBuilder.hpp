@@ -21,6 +21,14 @@
 #include "RengaPluginHelper.hpp"
 
 
+
+
+class EquipmentBuilderActionHandler;
+
+struct ActionHandlerDeleter {
+    void operator()(EquipmentBuilderActionHandler* ptr) const;
+};
+
 class UI;
 
 class EquipmentBuilder : public Renga::IPlugin {
@@ -38,6 +46,6 @@ private:
     std::wstring PluginPath = L"";
     std::wstring IconsPath = L"";
     std::wstring PrimitivesPath = L"";
-    std::unique_ptr<class EquipmentBuilderActionHandler> pActionHandler;
+    std::unique_ptr<EquipmentBuilderActionHandler, ActionHandlerDeleter> pActionHandler;
     friend class UI;
 };
