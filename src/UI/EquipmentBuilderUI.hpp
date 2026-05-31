@@ -26,19 +26,18 @@ public:
     void SetBuilder(EquipmentBuilder* pBuilder);
     void OpenUI();
     void CloseUI();
+
 private:
     UI() = default;
-    ~UI() {
-        CloseUI();
-    }
+    ~UI() { CloseUI(); };
     UI(const UI&) = delete;
     UI& operator=(const UI&) = delete;
 
-    EquipmentBuilder* fpBuilder = nullptr;
-    bool fWindowCreated = false;
-    HWND Window = nullptr;
+    void CreateUI(HWND hwnd);
 
+    EquipmentBuilder* fpBuilder = nullptr;
+    HWND Window = nullptr;
     static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
     LRESULT HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-    void CreateUI(HWND hwnd);
+    bool fWindowCreated = false;
 };

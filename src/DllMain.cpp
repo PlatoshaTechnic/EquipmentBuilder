@@ -26,4 +26,4 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved) {
             break;
     }
     return TRUE;
-}
+};

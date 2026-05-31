@@ -25,8 +25,8 @@ class UI;
 
 class EquipmentBuilder : public Renga::IPlugin {
 public:
-    EquipmentBuilder();
-    ~EquipmentBuilder();
+    EquipmentBuilder() {};
+    ~EquipmentBuilder() {};
 
     bool initialize(const wchar_t* Path) override;
     void stop() override;
@@ -34,13 +34,10 @@ public:
     
 private:
     const GUID ActionId = {0x3b719fe0, 0xa5ae, 0x4995, {0xb5, 0xd8, 0xeb, 0x84, 0xd5, 0xed, 0xd0, 0x0c}};
+    Renga::IApplicationPtr pApplication;
     std::wstring PluginPath = L"";
     std::wstring IconsPath = L"";
     std::wstring PrimitivesPath = L"";
-
-    Renga::IApplicationPtr pApplication;
-    
     std::unique_ptr<class EquipmentBuilderActionHandler> pActionHandler;
-
     friend class UI;
 };

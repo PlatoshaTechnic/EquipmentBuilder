@@ -27,17 +27,13 @@ public:
             UI::GetInstance().SetBuilder(m_pBuilder);
             UI::GetInstance().OpenUI();
         }
-    }
+    };
 
-    void OnToggled(bool checked) override {}
+    void OnToggled(bool checked) override {};
 
 private:
     EquipmentBuilder* m_pBuilder;
 };
-
-EquipmentBuilder::EquipmentBuilder() {}
-
-EquipmentBuilder::~EquipmentBuilder() {}
 
 bool EquipmentBuilder::initialize(const wchar_t* Path) {
     this->PluginPath = Path;
@@ -72,13 +68,13 @@ bool EquipmentBuilder::initialize(const wchar_t* Path) {
     pUI->AddExtensionToPrimaryPanel(pUIPanel);
 
     return true;
-}
+};
 
 void EquipmentBuilder::stop() {
     UI::GetInstance().CloseUI();
     pActionHandler.reset();
     return;
-}
+};
 
 void EquipmentBuilder::ImportPrimitives() {
 
@@ -86,9 +82,6 @@ void EquipmentBuilder::ImportPrimitives() {
     if (!pProject) {  return; }
 
     std::string FullPath = Renga::toNarrowString(this->PrimitivesPath + L"boiler.rst");
-
-    MessageBox(NULL, _bstr_t(FullPath.c_str()), L"Ошибка", MB_OK);
-
     Renga::IEntityPtr pImportedCategory = pProject->ImportCategoryS("5d2f3734-5a49-4504-90b1-0676f0f25da7", _bstr_t(FullPath.c_str()));
 
     if (!pImportedCategory) {
@@ -96,9 +89,8 @@ void EquipmentBuilder::ImportPrimitives() {
         return;
     }
 
-    MessageBox(NULL, L"Категория успешно импортирована", L"Успех", MB_OK);
     return;
-}
+};
 
 
 EXPORT_PLUGIN(EquipmentBuilder);

@@ -25,11 +25,11 @@ static std::atomic<bool> fUIRegistered{false};
 UI& UI::GetInstance() {
     static UI instance;
     return instance;
-}
+};
 
 void UI::SetBuilder(EquipmentBuilder* pBuilder) {
     fpBuilder = pBuilder;
-}
+};
 
 void UI::OpenUI() {
     if (fWindowCreated) { return; }
@@ -48,7 +48,7 @@ void UI::OpenUI() {
 
     Window = CreateWindowEx(0, L"EquipmentBuilder", L"EquipmentBuilder", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, 400, 300, nullptr, nullptr, GetModuleHandle(nullptr), this);
     if (Window) { fWindowCreated = true; }
-}
+};
 
 void UI::CloseUI() {
     if (Window) {
@@ -61,7 +61,7 @@ void UI::CloseUI() {
             fUIRegistered = false;
         }
     }
-}
+};
 
 LRESULT CALLBACK UI::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     UI* pUI = nullptr;
@@ -76,7 +76,7 @@ LRESULT CALLBACK UI::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     if (pUI) { return pUI->HandleMessage(hwnd, uMsg, wParam, lParam); }
 
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
+};
 
 LRESULT UI::HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
@@ -100,7 +100,7 @@ LRESULT UI::HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
                         }
                     }
                 }
-                else { MessageBox(hwnd, L"Builder not initialized", L"Error", MB_OK); }
+                else { MessageBox(hwnd, L"Not initialized", L"Error", MB_OK); }
             }
             break;
         }
@@ -119,13 +119,28 @@ LRESULT UI::HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
         }
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
-
-
+};
 
 void UI::CreateUI(HWND hwnd) {
-    CreateWindow(L"STATIC", L"Введите данные:", WS_CHILD | WS_VISIBLE, 10, 10, 150, 20, hwnd, nullptr, GetModuleHandle(nullptr), nullptr);
-    CreateWindow(L"EDIT", L"", WS_CHILD | WS_VISIBLE | WS_BORDER, 10, 35, 200, 25, hwnd, reinterpret_cast<HMENU>(101), GetModuleHandle(nullptr), nullptr);
-    CreateWindow(L"BUTTON", L"Импортировать куб", WS_CHILD | WS_VISIBLE, 10, 70, 150, 30, hwnd, reinterpret_cast<HMENU>(102), GetModuleHandle(nullptr), nullptr);
-    CreateWindow(L"STATIC", L"Статус: ", WS_CHILD | WS_VISIBLE, 10, 110, 300, 20, hwnd, reinterpret_cast<HMENU>(103), GetModuleHandle(nullptr), nullptr);
-}
+    CreateWindow(L"STATIC", L"Введите данные:",
+        WS_CHILD | WS_VISIBLE, 10, 10, 150, 20,
+        hwnd, reinterpret_cast<HMENU>(100),
+        GetModuleHandle(nullptr), nullptr
+    );
+    CreateWindow(L"EDIT", L"",
+        WS_CHILD | WS_VISIBLE | WS_BORDER, 10, 35, 200, 25,
+        hwnd, reinterpret_cast<HMENU>(101),
+        GetModuleHandle(nullptr), nullptr
+    );
+    CreateWindow(L"BUTTON", L"Импортировать куб",
+        WS_CHILD | WS_VISIBLE, 10, 70, 150, 30,
+        hwnd, reinterpret_cast<HMENU>(102),
+        GetModuleHandle(nullptr), nullptr
+    );
+    CreateWindow(
+        L"STATIC", L"Статус: ",
+        WS_CHILD | WS_VISIBLE, 10, 110, 300, 20,
+        hwnd, reinterpret_cast<HMENU>(103),
+        GetModuleHandle(nullptr), nullptr
+    );
+};
