@@ -83,13 +83,13 @@ void EquipmentBuilder::stop() {
 void EquipmentBuilder::ImportPrimitives() {
 
     Renga::IProjectPtr pProject = this->pApplication->GetProject();
-    if (!pProject) {  return; }
+    if (!pProject) { return; }
 
     std::string FullPath = Renga::toNarrowString(this->PrimitivesPath + L"boiler.rst");
-    Renga::IEntityPtr pImportedCategory = pProject->ImportCategoryS("5d2f3734-5a49-4504-90b1-0676f0f25da7", _bstr_t(FullPath.c_str()));
+    Renga::IEntityPtr pImportedCategory = pProject->ImportCategory({ 0x0abcb18f, 0x0aaf, 0x4509, {0xbf, 0x89, 0x5c, 0x5f, 0xad, 0x9d, 0x5d, 0x8b} }, _bstr_t(FullPath.c_str()));
 
     if (!pImportedCategory) {
-        MessageBox(NULL, L"Не удалось импортировать категорию", L"Ошибка", MB_OK);
+        MessageBox(NULL, this->pApplication->GetLastError(), L"Ошибка", MB_OK);
         return;
     }
 
