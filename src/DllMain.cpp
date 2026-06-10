@@ -20,9 +20,11 @@
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved) {
     switch (dwReason) {
         case DLL_PROCESS_ATTACH:
+            CoInitialize(NULL);
             DisableThreadLibraryCalls(hModule);
             break;
         case DLL_PROCESS_DETACH:
+            CoUninitialize();
             break;
     }
     return TRUE;

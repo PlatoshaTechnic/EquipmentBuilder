@@ -18,9 +18,9 @@
 #include <Windows.h>
 #include <memory>
 #include <string>
+#include <atomic>
+#include <unordered_map>
 #include "RengaPluginHelper.hpp"
-
-
 
 
 class EquipmentBuilderActionHandler;
@@ -29,23 +29,43 @@ struct ActionHandlerDeleter {
     void operator()(EquipmentBuilderActionHandler* ptr) const;
 };
 
-class UI;
-
 class EquipmentBuilder : public Renga::IPlugin {
 public:
-    EquipmentBuilder() {};
-    ~EquipmentBuilder() {};
+
+    static std::unordered_map<HWND, EquipmentBuilder*> s_windowMap;
+    
+    
+    EquipmentBuilder() : ActiveBuilder(nullptr) {}
+    ~EquipmentBuilder() { CloseUI(); };
 
     bool initialize(const wchar_t* Path) override;
     void stop() override;
-    void ImportPrimitives();
-    
+
+    void OpenUI(EquipmentBuilder* builder);
+    void CloseUI();
+
 private:
-    const GUID ActionId = {0x3b719fe0, 0xa5ae, 0x4995, {0xb5, 0xd8, 0xeb, 0x84, 0xd5, 0xed, 0xd0, 0x0c}};
+    void ClearWindow(HWND hwnd);
+    void DrawMainPage(HWND hwnd);
+    void DrawGeoPage(HWND hwnd);
+    void ImportPrimitives();
+
+    HWND Window = nullptr;
+    static LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    LRESULT HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    std::atomic<bool> fWindowCreated{false};
+
+
+
     Renga::IApplicationPtr pApplication;
-    std::wstring PluginPath = L"";
+    Renga::IProjectPtr pProject;
     std::wstring IconsPath = L"";
-    std::wstring PrimitivesPath = L"";
+    std::wstring PluginPath = L"";
     std::unique_ptr<EquipmentBuilderActionHandler, ActionHandlerDeleter> pActionHandler;
-    friend class UI;
+    EquipmentBuilder* ActiveBuilder;
+    int ConeId = 0;
+    int CubeId = 0;
+    int CylinderId = 0;
+    int SphereId = 0;
+    int PortId = 0;
 };

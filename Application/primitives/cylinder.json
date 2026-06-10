@@ -1,0 +1,52 @@
+{
+    "metadata": {
+        "defaultName": "cylinder",
+        "description": "cylinder",
+        "version": "1.0.0",
+        "author": "EquipmentBuilder"
+    },
+    "styleParameters": [
+        {
+            "name": "General",
+            "text": "General",
+            "params": [
+                {
+                    "name": "Material",
+                    "text": "Material",
+                    "type": "Id",
+                    "entityTypeId": "0abcb18f-0aaf-4509-bf89-5c5fad9d5d8b"
+                }
+            ]
+        },
+        {
+            "name": "dimensions",
+            "text": "dimensions",
+            "params": [
+                {
+                    "name": "sd",
+                    "text": "d",
+                    "type": "Length",
+                    "default": 1000,
+                    "min": 10,
+                    "max": 10000
+                },
+                {
+                    "name": "sh",
+                    "text": "h",
+                    "type": "Length",
+                    "default": 1000,
+                    "min": 10,
+                    "max": 10000
+                }
+            ]
+        }
+    ],
+    "ports": [
+        {
+            "name": "port",
+            "text": "port",
+            "flowDirection": "InletAndOutlet",
+            "systemCategories": [ "DomesticColdWater" ]
+        }
+    ]
+}

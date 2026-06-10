@@ -1,0 +1,60 @@
+{
+    "metadata": {
+        "defaultName": "cube",
+        "description": "cube",
+        "version": "1.0.0",
+        "author": "EquipmentBuilder"
+    },
+    "styleParameters": [
+        {
+            "name": "General",
+            "text": "General",
+            "params": [
+                {
+                    "name": "Material",
+                    "text": "Material",
+                    "type": "Id",
+                    "entityTypeId": "0abcb18f-0aaf-4509-bf89-5c5fad9d5d8b"
+                }
+            ]
+        },
+        {
+            "name": "dimensions",
+            "text": "dimensions",
+            "params": [
+                {
+                    "name": "sx",
+                    "text": "x",
+                    "type": "Length",
+                    "default": 1000,
+                    "min": 10,
+                    "max": 10000
+                },
+                {
+                    "name": "sy",
+                    "text": "y",
+                    "type": "Length",
+                    "default": 1000,
+                    "min": 10,
+                    "max": 10000
+                },
+                {
+                    "name": "sz",
+                    "text": "z",
+                    "type": "Length",
+                    "default": 1000,
+                    "min": 10,
+                    "max": 10000
+                }
+            ]
+        }
+    ],
+    "ports": [
+        {
+            "name": "port",
+            "text": "port",
+            "flowDirection": "InletAndOutlet",
+            "systemCategories": [ "DomesticColdWater" ]
+        }
+    ]
+}
